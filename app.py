@@ -8,7 +8,7 @@ def main():
     st.markdown("""
     <style>
     body {
-        background-image: url("https://blog.carlow.edu/wp-content/uploads/sites/26/2022/04/how-artificial-intelligence-is-shaping-data-analytics.jpg");
+        background-image: url("https://raw.githubusercontent.com/niharpalem/eda/806b90f2875a0d5d4afc9001f8affedd14669c15/how-artificial-intelligence-is-shaping-data-analytics.jpg");
         background-size: cover;
     }
     </style>
@@ -73,7 +73,8 @@ def main():
             plot_type = st.selectbox('Select plot type', plot_types)
             x_var = st.selectbox('Select x variable', data.columns)
             y_var = st.selectbox('Select y variable', data.columns)
-            fig = px.__dict__[plot_type](data, x=x_var, y=y_var)
+            color = st.color_picker('Pick a color for your plot')
+            fig = px.__dict__[plot_type](data, x=x_var, y=y_var, color_discrete_sequence=[color])
             st.plotly_chart(fig)
 
     st.markdown("---")
