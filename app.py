@@ -1,15 +1,11 @@
-
 import streamlit as st
 import pandas as pd
 import plotly.express as px
-from streamlit_ace import st_ace
 
 def main():
     st.title('CSV File Reader')
 
     uploaded_file = st.file_uploader("Choose a CSV file", type="csv")
-
-    plots = st_ace(value="", language="python", key="ace-editor")
 
     if uploaded_file is not None:
         data = pd.read_csv(uploaded_file, engine='python')
@@ -36,12 +32,9 @@ def main():
                     fig = px.bar(data, x=x_axis, y=y_axis, color_discrete_sequence=[color])
                 elif chart_type == 'Area':
                     fig = px.area(data, x=x_axis, y=y_axis, color_discrete_sequence=[color])
-                plots = st_ace(value=fig.to_json(), language="python", key="ace-editor")
+                st.plotly_chart(fig)
             except Exception as e:
                 st.write(f"An error occurred: {e}")
-
-        if plots:
-            st.plotly_chart(plots)
 
 if __name__ == "__main__":
     main()
